@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	
+	<!-- 配置加载 -->
+	<!--
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="ignoreResourceNotFound" value="false"></property>
+			<property name="ignoreUnresolvablePlaceholders" value="true"></property>
+			<property name="locations">
+				<list>
+					<value>classpath:*.properties</value>					
+				</list>
+			</property>
+		</bean>
+		-->
+	<!--
+		<context:property-placeholder location="classpath:*.properties" />
+		-->
+	
+	
+	<!--自定义properties加载-->
+	<bean class="org.luisyang.spring.basic.config.CustomizedPropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="false"></property>
+		<property name="ignoreUnresolvablePlaceholders" value="false"></property>
+		<property name="locations">
+			<list>
+				<value>classpath:*.properties</value>					
+			</list>
+		</property>
+	</bean>
+	<!--测试属性注入-->
+	<bean id="properties" class="org.luisyang.spring.basic.domain.Properties">
+		<property name="a" value="${a}"></property>
+		<property name="c" value="${c}"></property>
+		<property name="e" value="${e}"></property>
+	</bean>
+	
+	<bean id="dataSource"     
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">     
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+		<property name="url" value="${jdbc.url}" />  
+		<property name="username" value="${jdbc.username}" />     
+		<property name="password" value="${jdbc.password}" />  
+	</bean>  
+
+	<!-- IOC测试 -->
+	<bean id="user" class="org.luisyang.spring.basic.domain.User">
+		<property name="id" value="1"></property>
+		<property name="name" value="1123"></property>
+	</bean>
+
+	<!-- AOP测试 -->
+	<bean id="audience" class="org.luisyang.spring.basic.aop.Audience" />
+	<bean id="sax" class="org.luisyang.spring.basic.service.impl.Saxophone" />
+	<bean id="kenny"
+		class="org.luisyang.spring.basic.service.impl.Instrumentalist">
+		<property name="song" value="Jingle Bells" />
+		<property name="age" value="25" />
+		<property name="instrument" ref="sax" />
+	</bean>
+
+	<!-- <bean id="#" class="org.springframework.ProxyFactoryBean"> <property 
+		name="proxyTargetClass"> <value>true</value> </property></bean> -->
+
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="audience">
+			<aop:pointcut id="performance"
+				expression="execution(* org.luisyang.spring.basic.service.Performer.perform(..))" />
+			<aop:before pointcut-ref="performance" method="takeSeats" />
+			<aop:before pointcut-ref="performance" method="turnOffCellPhones" />
+			<aop:after-returning pointcut-ref="performance"
+				method="applaud" />
+			<aop:after-throwing pointcut-ref="performance"
+				method="demandRefund" />
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>
