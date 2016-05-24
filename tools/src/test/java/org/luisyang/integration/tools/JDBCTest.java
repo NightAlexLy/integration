@@ -10,7 +10,7 @@ import junit.framework.TestCase;
  * 
  * @author ly
  */
-public class SeqTest extends TestCase{
+public class JDBCTest extends TestCase{
 
 	private static final String URL = "jdbc:mysql://192.168.91.135:3306/test?useUnicode=yes&characterEncoding=utf8";
 	private static final String USER = "root";

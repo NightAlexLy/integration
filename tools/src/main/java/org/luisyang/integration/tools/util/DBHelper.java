@@ -23,6 +23,8 @@ public class DBHelper {
 	private static String URL = "";
 	private static String USERNAME = "";
 	private static String PASSWORD = "";
+	
+	private static Connection connection = null;
 
 	static {
 		Properties properties = new Properties();
@@ -127,6 +129,34 @@ public class DBHelper {
 		close(connection, statement, null);
 		return result;
 	}
+	
+	/**
+	 * 根据SequenceId获得下一个值
+	 * @param sql
+	 * @param args
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int getSeqenceById(String sql, Object... args) throws SQLException {
+		Connection connection = getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		for (int i = 0; i < args.length; i++) {
+			statement.setObject(i + 1, args[i]);
+		}
+		ResultSet query = statement.executeQuery();
+		ResultSetMetaData md =  query.getMetaData();
+		int columnCount = md.getColumnCount();
+		int index = 1;
+		while (query.next()) {
+			// 将集合放在map中
+			for (int i = 1; i <= columnCount; i++) {
+				index = Integer.valueOf(query.getObject(i).toString());
+				break;
+			}
+		}
+		close(connection, statement, null);
+		return index;
+	}
 
 	@SuppressWarnings("rawtypes")
 	public static <T> List<T> executeQuery(String sql, Class T, Object... args) throws SQLException {
@@ -150,7 +180,7 @@ public class DBHelper {
 		return list;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static <T> List<T> resultSetToT(ResultSet query, Class T) throws SQLException, InstantiationException, ReflectiveOperationException {
 		// TODO Auto-generated method stub
 		if (query == null)
@@ -172,6 +202,7 @@ public class DBHelper {
 		return list;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private static Class getFieldType(Class T,String name){
 		Field[] declaredFields = T.getDeclaredFields();
 		for (Field field : declaredFields) {
@@ -183,11 +214,11 @@ public class DBHelper {
 
 	public static void main(String[] args) throws Exception {
 
-		
 		List<User> users = executeQuery("select * from user where id = 1", User.class);
 		for(User user : users){
 			System.out.println(user.toString());
 		}
 
+		System.out.println(DBHelper.getSeqenceById("select nextval(?) as value","test"));;
 	}
 }
