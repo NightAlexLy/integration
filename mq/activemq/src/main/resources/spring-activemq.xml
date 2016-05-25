@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.11.0.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>application.properties</value>
+        </property>
+    </bean>
+
+    <!-- Activemq connection factory -->
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <constructor-arg index="0" value="${jms.broker.username}"/>
+        <constructor-arg index="1" value="${jms.broker.password}"/>
+        <constructor-arg index="2" value="${jms.broker.url}"/>
+        <property name="useAsyncSend" value="true"/>
+    </bean>
+
+    <!-- ConnectionFactory Definition -->
+    <bean id="connectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <constructor-arg ref="amqConnectionFactory"/>
+    </bean>
+
+    <!--  Default Destination Queue Definition-->
+    <bean id="defaultDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg index="0" value="${jms.topic.name}"/>
+    </bean>
+
+    <!-- JmsTemplate Definition -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="defaultDestination"/>
+    </bean>
+
+    <!-- Message Sender Definition -->
+    <bean id="messageSender" class="org.community.test.jms.MessageSender">
+        <constructor-arg index="0" ref="jmsTemplate"/>
+    </bean>
+</beans>
