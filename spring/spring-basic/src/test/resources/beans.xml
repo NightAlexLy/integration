@@ -37,6 +37,7 @@
 			</list>
 		</property>
 	</bean>
+	
 	<!--测试属性注入-->
 	<bean id="properties" class="org.luisyang.spring.basic.domain.Properties">
 		<property name="a" value="${a}"></property>

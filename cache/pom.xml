@@ -7,30 +7,14 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>org.luisyang.integration</groupId>
-	<artifactId>spring</artifactId>
+	<artifactId>cache</artifactId>
+	<name>cache</name>
 	<packaging>pom</packaging>
-	<name>spring</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.1.6.RELEASE</spring.version>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<modules>
-		<module>spring-basic</module>
-		<module>spring-web</module>
-    <module>spring-jdbc</module>
+	<modules></modules>	</properties>
+  <modules>
+    <module>redis</module>
   </modules>
 </project>
