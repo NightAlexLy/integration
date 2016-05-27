@@ -7,7 +7,7 @@ integration
 	| _ _ _ cache   //cache framwork  
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _redis  
 	| _ _ _ clock   //auto clock  
-	| _ _ _ log     //log framework
+	| _ _ _ log     //log framework  
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ log4j    //slf4j+log4j  
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ logback  //logback+slf4j  
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ slf4j   //standard  
