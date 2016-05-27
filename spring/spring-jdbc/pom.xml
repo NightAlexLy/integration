@@ -38,7 +38,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -62,6 +62,35 @@
 			<version>5.1.38</version>
 		</dependency>
 		<!-- Mysql驱动 End -->
+
+		<!-- DBCP配置源 Start -->
+		<!-- http://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- DBCP配置源 End -->
+
+		<!-- C3p0配置源 Start -->
+		<!-- http://mvnrepository.com/artifact/com.mchange/c3p0 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<!-- C3p0配置源 End -->
+
+		<!-- http://mvnrepository.com/artifact/proxool/proxool -->
+		<!-- <dependency> <groupId>proxool</groupId> <artifactId>proxool</artifactId> 
+			<version>0.8.3</version> </dependency> -->
+
+		<!-- http://mvnrepository.com/artifact/com.alibaba/druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.18</version>
+		</dependency>
 
 	</dependencies>
 </project>

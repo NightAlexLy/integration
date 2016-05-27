@@ -20,15 +20,14 @@
 		<property name="password" value="${jdbc.password}" />  
 	</bean>  
 
-
-    <bean id="baseDAO" class="org.luisyang.integration.spring.jdbc.dao.impl.BaseDAO" abstract="true"> 
-        <property name="dataSource"> 
-            <ref bean="dataSource"/> 
-        </property> 
-    </bean> 
-
-    <bean id="userDAO" 
-          class="org.luisyang.integration.spring.jdbc.dao.impl.UserTestDAOImpl" parent="baseDAO"> 
-    </bean> 
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate" >
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="studentDao" 
+		class="org.luisyang.integration.spring.jdbc.dao.impl.StudentDaoImpl" >
+		 <property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean> 
 
 </beans>

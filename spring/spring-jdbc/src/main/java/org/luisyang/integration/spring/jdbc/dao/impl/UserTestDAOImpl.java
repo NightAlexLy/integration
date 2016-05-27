@@ -8,7 +8,7 @@ import java.sql.Statement;
 import org.luisyang.integration.spring.jdbc.dao.IUserTestDAO;
 import org.luisyang.integration.spring.jdbc.domain.UserTest;
 
-public class UserTestDAO extends BaseDAO implements IUserTestDAO {
+public class UserTestDAOImpl extends BaseDAO implements IUserTestDAO {
 	
 	public void insert(UserTest user) {
 		String name = user.getName();
