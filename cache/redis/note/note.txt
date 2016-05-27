@@ -1,0 +1,8 @@
+
+java对redis的基本操作:
+
+	http://www.cnblogs.com/edisonfeng/p/3571870.html
+	
+Java 使用 Redis:
+
+	http://www.runoob.com/redis/redis-java.html
