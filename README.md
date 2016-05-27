@@ -1,22 +1,22 @@
 # integration
 集成工具Demo
 
-项目结构
+###项目结构
 	
-integration
-	| _ _ _ cache   //缓存框架
-			| _ _ _redis
-	| _ _ _ clock   //auto clock
-	| _ _ _ log     //日志框架
-			| _ _ _ log4j    //slf4j+log4j
-			| _ _ _ logback  //logback+slf4j
-			| _ _ _ slf4j   //标准
-	| _ _ _ mq
-			| _ _ _ activemq  //apache activemq demo
-			| _ _ _ kafka     //apache kafka demo
-			| _ _ _ metaq     //alibaba metaq demo
-	| _ _ _ spring
-			| _ _ _ spring-basic  //sping 基本功能  ioc/aop
-			| _ _ _ spring-jdbc   //spring datasource   c3p0/dbcp/druid/proxool
-			| _ _ _ spring-web    //spring-mvc  demo
-	| _ _ _ tools   //basic tool   common code
+integration  
+	| _ _ _ cache   //cache framwork
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _redis  
+	| _ _ _ clock   //auto clock  
+	| _ _ _ log     //log framework
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ log4j    //slf4j+log4j  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ logback  //logback+slf4j  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ slf4j   //standard  
+	| _ _ _ mq  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ activemq  //apache activemq demo  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ kafka     //apache kafka demo  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ metaq     //alibaba metaq demo  
+	| _ _ _ spring  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ spring-basic  //sping basic function  ioc/aop  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ spring-jdbc   //spring datasource     c3p0/dbcp/druid/proxool    
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ spring-web    //spring-mvc  demo  
+	| _ _ _ tools   //basic tool   common code  
