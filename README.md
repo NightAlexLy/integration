@@ -4,7 +4,7 @@
 ###项目结构
 	
 integration  
-	| _ _ _ cache   //cache framwork
+	| _ _ _ cache   //cache framwork  
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _redis  
 	| _ _ _ clock   //auto clock  
 	| _ _ _ log     //log framework
