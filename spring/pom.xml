@@ -32,5 +32,6 @@
 		<module>spring-basic</module>
 		<module>spring-web</module>
     <module>spring-jdbc</module>
+    <module>spring-data-redis</module>
   </modules>
 </project>
