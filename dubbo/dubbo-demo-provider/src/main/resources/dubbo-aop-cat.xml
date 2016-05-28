@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+         xmlns:aop="http://www.springframework.org/schema/aop"  
+         xmlns:tx="http://www.springframework.org/schema/tx"  
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd  
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">  
+    
+    
+    <bean id="catLogAdvice" class="com.cib.cat4dubbo.RpcLogAdvice" ></bean>  
+    
+    <aop:config> 
+     
+        <aop:aspect id="catLogAspect" ref="catLogAdvice">
+        
+            <!-- service 接口切入 -->
+            <aop:pointcut id="service_points" expression="(execution(* com.alibaba.dubbo.demo.provider.*.*(..)))"/>  
+            <aop:around method="doRpcAround"  pointcut-ref="service_points"/>
+            <!-- 
+            renference 接口切入
+            <aop:pointcut id="renference_points" expression="${cat.renference_points:(execution(void com.cib.cat4dubbo.IfNull.xyz0(..)))}"/>  
+            <aop:around method="doRpcAround"  pointcut-ref="renference_points"/>
+            
+            local 接口切入
+            <aop:pointcut id="local_points" expression="${cat.local_points:(execution(void com.cib.cat4dubbo.IfNull.xyz0(..)))}"/>  
+            <aop:around method="doLocalMethodAround"  pointcut-ref="local_points"/>
+             -->
+        </aop:aspect>
+        
+    </aop:config>  
+    
+</beans>  

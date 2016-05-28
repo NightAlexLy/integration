@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 1999-2011 Alibaba Group.
+ -  
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -  
+ -      http://www.apache.org/licenses/LICENSE-2.0
+ -  
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    
+    <!-- 读入配置属性文件 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="ignoreResourceNotFound" value="false" /> 
+  		<property name="ignoreUnresolvablePlaceholders" value="true" />  
+        
+        <property name="locations">
+            <list>
+                <value>file:conf/*.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <dubbo:provider>
+         <dubbo:parameter key="shutdown.timeout" value="10000" /> <!-- 单位毫秒 -->
+    </dubbo:provider>
+    
+    <!-- owner应用或者服务的负责人 -->
+	<dubbo:application name="demo-provider" owner=""/>
+    
+    <!-- 建议将internal配置放到公共配置文件中 -->
+	<dubbo:registry id="internal" protocol="${dubbo.registry.internal.protocol}" address="${dubbo.registry.internal.address}" />
+ 	<dubbo:registry id="external" protocol="${dubbo.registry.external.protocol}" address="${dubbo.registry.internal.address}" />
+	
+    <!--  大文件传输，协议选择rmi -->
+ 	<dubbo:protocol name="rmi" port="1099" accesslog="log/access.log" /> 
+    
+	<dubbo:protocol name="dubbo" port="20880" accesslog="true">
+        <dubbo:parameter key="shutdown.timeout" value="10000" /> <!-- 单位毫秒 -->
+    </dubbo:protocol>
+	
+	<bean id="demoService" class="com.alibaba.dubbo.demo.provider.DemoServiceImpl" />
+	
+    <!-- 
+                当consumer发现所有服务不可用时，mock的使用场景
+     <provider delay="-1" /> 当spring容器有依赖，需要
+     <protocol/service/reference timeout="1000"  默认1000ms, 复杂/阻塞时间比较长的服务可以加大 
+     -->
+	<dubbo:service interface="com.alibaba.dubbo.demo.DemoService" ref="demoService" protocol="dubbo" registry="internal"  />
+    <!-- internal暴露给内部的，external是暴露给外部的（比如网银） -->
+	<dubbo:service interface="com.alibaba.dubbo.demo.DemoService" ref="demoService" protocol="rmi" registry="internal" />
+	
+</beans>
