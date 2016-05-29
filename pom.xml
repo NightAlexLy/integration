@@ -38,5 +38,6 @@
 		<module>log</module>
 		<module>dubbo</module>
     <module>orm</module>
+    <module>container</module>
   </modules>
 </project>

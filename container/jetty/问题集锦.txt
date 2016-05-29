@@ -1,0 +1,46 @@
+1.jetty7 No JSP support解决办法
+
+	报错如下：
+ 
+    [INFO] No JSP support. Check that JSP jars are in lib/jsp and that the JSP option has been specified to start.jar
+ 
+    注意：jsp-2.1-glassfish是必要的，如果使用jetty-jsp-2.1貌似还是会报这个错。
+
+2.Jetty 启动帮助类
+
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
+ 
+/**
+ * jetty 启动运行调试帮助类
+ * 需要 jetty-all-server-7.0.0.RC4.jar 支持
+ * @author 晚风工作室 www.soservers.com
+ *
+ */
+public class JettyPluginsUtil {
+ 
+    /**
+     * 创建用于正常运行调试的 Jetty Server，以src/main/webapp为web应用目录
+     * @param port
+     * @param contextPath
+     * @return
+     */
+    public static Server budildNormalServer(int port, String contextPath){
+         
+        Server server = new Server(port);
+        WebAppContext webContext = new WebAppContext("WebRoot", contextPath);
+        webContext.setDefaultsDescriptor("./webdefault.xml");
+        webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
+        server.setHandler(webContext);
+        server.setStopAtShutdown(true);
+         
+        return server;
+         
+    }
+     
+    public static void main(String[] args) {
+         
+ 
+    }
+ 
+}	

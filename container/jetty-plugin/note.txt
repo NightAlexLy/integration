@@ -1,0 +1,15 @@
+本Demo采用
+	spring-mvc + jetty plugin  实现Restful风格的Web项目
+	
+重要点：
+	1.导入MVC依赖
+	2.导入 jetty  plugin
+	3.编写controller
+	4.编写AppIntializer
+		指定项目初始化路径
+	5.启动：  run as --->  maven   [mvn jetty:run]	
+	6.访问：http://localhost:9080/jetty/user/1
+	
+	
+
+
