@@ -1,0 +1,18 @@
+常用注解介绍
+
+	@ID 表示主键
+	@Entity  表示实体类  对应表
+	@Table   指定实体对应数据库表的信息。 比如表名等
+	@Column  表示列，  指定列的详细信息。 比如类型、长度等
+	@Transient  表示该字段不进行持久化。  
+	@Temporal(value=TemporalType)   表示时间类的字段。  指定时间字段的格式
+		其中TemporalType有三个值：TemporalType.TIMESTAMP 表示yyyy-MM-dd HH:mm:ss
+                               TemporalType.DATE      表示yyyy-MM-dd
+                               TemporalType.TIME      表示HH:mm:ss
+	@Enumerated(value=EnumType)表示此成员属性为枚举映射到数据库
+			①EnumType.STRING  表示直接将枚举名称存入数据库
+            ②EnumType.ORDINAL 表示将枚举所对应的数值存入数据库
+            
+    
+	
+

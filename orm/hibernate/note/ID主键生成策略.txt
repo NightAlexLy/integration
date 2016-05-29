@@ -1,0 +1,167 @@
+第一种方式：XML
+
+<id>标签必须配置在<class>标签内第一个位置。由一个字段构成主键，如果是复杂主键<composite-id>标签
+被映射的类必须定义对应数据库表主键字段。大多数类有一个JavaBeans风格的属性， 为每一个实例包含唯一的标识。<id> 元素定义了该属性到数据库表主键字段的映射。
+<id
+       name="propertyName"                                          (1)
+       type="typename"                                              (2)
+       column="column_name"                                         (3)
+       unsaved-value="null|any|none|undefined|id_value"             (4)
+       access="field|property|ClassName"                            (5)
+       node="element-name|@attribute-name|element/@attribute|.">
+ 
+        <generatorclass="generatorClass"/>
+</id>
+(1) name (可选): 标识属性的名字(实体类的属性)。
+(2) type (可选): 标识Hibernate类型的名字(省略则使用hibernate默认类型)，也可以自己配置其它hbernate类型(integer, long, short, float,double, character, byte, boolean, yes_no, true_false)
+(2) length(可选):当type为varchar时，设置字段长度
+(3) column (可选 - 默认为属性名): 主键字段的名字(省略则取name为字段名)。
+(4) unsaved-value (可选 - 默认为一个切合实际（sensible）的值): 一个特定的标识属性值，用来标志该实例是刚刚创建的，尚未保存。 这可以把这种实例和从以前的session中装载过（可能又做过修改--译者注） 但未再次持久化的实例区分开来。
+(5) access (可选 - 默认为property): Hibernate用来访问属性值的策略。
+如果 name属性不存在，会认为这个类没有标识属性。
+unsaved-value 属性在Hibernate3中几乎不再需要。
+还有一个另外的<composite-id>定义可以访问旧式的多主键数据。 我们强烈不建议使用这种方式。
+<generator>元素(主键生成策略)
+主键生成策略是必须配置
+用来为该持久化类的实例生成唯一的标识。如果这个生成器实例需要某些配置值或者初始化参数， 用<param>元素来传递。
+<id name="id"type="long" column="cat_id">
+       <generator class="org.hibernate.id.TableHiLoGenerator">
+               <param name="table">uid_table</param>
+               <param name="column">next_hi_value_column</param>
+       </generator>
+</id>
+所有的生成器都实现org.hibernate.id.IdentifierGenerator接口。 这是一个非常简单的接口；某些应用程序可以选择提供他们自己特定的实现。当然， Hibernate提供了很多内置的实现。下面是一些内置生成器的快捷名字：
+increment
+用于为long, short或者int类型生成 唯一标识。只有在没有其他进程往同一张表中插入数据时才能使用。 在集群下不要使用。
+identity
+对DB2,MySQL, MS SQL Server,Sybase和HypersonicSQL的内置标识字段提供支持。 返回的标识符是long, short 或者int类型的。 (数据库自增)
+sequence
+在DB2,PostgreSQL, Oracle, SAPDB, McKoi中使用序列（sequence)， 而在Interbase中使用生成器(generator)。返回的标识符是long, short或者 int类型的。(数据库自增)
+hilo
+使用一个高/低位算法高效的生成long, short 或者 int类型的标识符。给定一个表和字段（默认分别是 hibernate_unique_key和next_hi）作为高位值的来源。 高/低位算法生成的标识符只在一个特定的数据库中是唯一的。
+seqhilo
+使用一个高/低位算法来高效的生成long, short 或者 int类型的标识符，给定一个数据库序列（sequence)的名字。
+uuid
+用一个128-bit的UUID算法生成字符串类型的标识符， 这在一个网络中是唯一的（使用了IP地址）。UUID被编码为一个32位16进制数字的字符串，它的生成是由hibernate生成，一般不会重复。
+UUID包含：IP地址，JVM的启动时间（精确到1/4秒），系统时间和一个计数器值（在JVM中唯一）。 在Java代码中不可能获得MAC地址或者内存地址，所以这已经是我们在不使用JNI的前提下的能做的最好实现了
+guid
+在MS SQL Server 和 MySQL 中使用数据库生成的GUID字符串。
+native
+根据底层数据库的能力选择identity,sequence 或者hilo中的一个。(数据库自增)
+assigned
+让应用程序在save()之前为对象分配一个标示符。这是 <generator>元素没有指定时的默认生成策略。(如果是手动分配，则需要设置此配置)
+select
+通过数据库触发器选择一些唯一主键的行并返回主键值来分配一个主键。
+foreign
+使用另外一个相关联的对象的标识符。通常和<one-to-one>联合起来使用。
+
+
+第二种方式：  注解
+
+使用@GeneratedValue(strategy=GenerationType)注解可以定义该标识符的生成策略
+Strategy有四个值：
+①     、AUTO- 可以是identity column类型,或者sequence类型或者table类型,取决于不同的底层数据库.
+相当于native
+②     、TABLE- 使用表保存id值
+③     、IDENTITY- identity column
+④     、SEQUENCE- sequence
+注意：auto是默认值，也就是说没有后的参数则表示为auto
+1、AUTO默认
+@Id
+    @GeneratedValue
+    public int getId() {
+        return id;
+}
+或
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
+public int getId() {
+return id;
+}
+1、  对于mysql，使用auto_increment
+2、  对于oracle使用hibernate_sequence(名称固定)
+2、IDENTITY
+@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public int getId() {
+        return id;
+}
+对DB2,MySQL, MS SQL Server,Sybase和HypersonicSQL的内置标识字段提供支持。 返回的标识符是long, short 或者int类型的。 (数据库自增)
+注意：此生成策略不支持Oracle
+ 
+3、SEQUENCE
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    public int getId() {
+        return id;
+    }
+在DB2,PostgreSQL,Oracle, SAP DB, McKoi中使用序列（sequence)， 而在Interbase中使用生成器(generator)。返回的标识符是long, short或者 int类型的。(数据库自增)
+注意：此生成策略不支持MySQL
+ 
+4、为Oracle指定定义的Sequence
+    a)、首先需要在实体类前面申明一个Sequence如下：
+        方法：@SequenceGenerator(name="SEQ_Name",sequenceName="SEQ_DB_Name")
+            参数注意：SEQ_Name:表示为申明的这个Sequence指定一个名称，以便使用
+                    SEQ_DB_Name:表示为数据库中的Sequence指定一个名称。
+                    两个参数的名称可以一样。
+@Entity
+@SequenceGenerator(name="teacherSEQ",sequenceName="teacherSEQ_DB")
+public class Teacher {
+……
+}
+b)、然后使用@GeneratedValue注解
+    方法：@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SEQ_Name")
+    参数：strategy：固定为GenerationType.SEQUENCE
+         Generator:在实体类前面申明的sequnce的名称
+@Entity
+@SequenceGenerator(name="teacherSEQ",sequenceName="teacherSEQ_DB")
+public class Teacher {
+    private int id;
+   
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="teacherSEQ")
+    public int getId() {
+        return id;
+}}
+ 
+5、TABLE - 使用表保存id值
+  原理：就是在数据库中建立一个表，这个表包含两个字段，一个字段表示名称，另一个字段表示值。每次在添加数据时，使用第一个字段的名称，来取值作为添加数据的ID，然后再给这个值累加一个值再次存入数据库，以便下次取出使用。
+Table主键生成策略的定义：
+@javax.persistence.TableGenerator(
+        name="Teacher_GEN",              //生成策略的名称
+        table="GENERATOR_TABLE",     //在数据库生成表的名称
+        pkColumnName = "pk_key",     //表中第一个字段的字段名 类型为varchar,key
+        valueColumnName = "pk_value",    //表中第二个字段的字段名 int ,value
+        pkColumnValue="teacher",     //这个策略中使用该记录的第一个字段的值(key值)
+        initialValue = 1,                //这个策略中使用该记录的第二个字段的值(value值)初始化值
+        allocationSize=1                  //每次使用数据后累加的数值
+)
+这样执行后，会在数据库建立一个表，语句如下：
+ create tableGENERATOR_TABLE (pk_key varchar(255),pk_value integer )
+结构：
+
+并且表建立好后，就插入了一个记录，如下：
+    
+注：这条记录的pk_value值为2，是因为刚刚做例程序时，已经插入一条记录了。初始化时为1。
+使用TABLE主键生成策略：
+@Entity
+@javax.persistence.TableGenerator(
+        name="Teacher_GEN",              //生成策略的名称
+        table="GENERATOR_TABLE",     //在数据库生成表的名称
+        pkColumnName = "pk_key",     //表中第一个字段的字段名 类型为varchar,key
+        valueColumnName = "pk_value",    //表中第二个字段的字段名 int ,value
+        pkColumnValue="teacher",     //这个策略中使用该记录的第一个字段的值(key值)
+        initialValue = 1,                //这个策略中使用该记录的第二个字段的值(value值)初始化值
+        allocationSize=1                 //每次使用数据后累加的数值
+)
+public class Teacher {
+    private int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.TABLE,generator="Teacher_GEN")
+    public int getId() {
+        return id;}}
+注意：这样每次在添加Teacher记录时，都会先到GENERATOR_TABLE表取pk_key=teacher的记录后，使用pk_value值作为记录的主键。然后再给这个pk_value字段累加1，再存入到GENERATOR_TABLE表中，以便下次使用。
+    这个表可以给无数的表作为主键表，只是添加一条记录而以(需要保证table、pkColumnName、valueColumnName三个属性值一样就可以了。)，这个主键生成策略可以跨数据库平台。
+
+
+

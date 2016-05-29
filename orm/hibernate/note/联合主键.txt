@@ -1,0 +1,13 @@
+
+1.联合主键类必须实现java.io.Serializable接口
+2.定义联合主键：
+	2.1XML的方式：
+		<composite-id name="fiscalYearPeriodPK">
+            <key-property name="fiscalYear"/>
+            <key-property name="fiscalPeriod"/>
+        </composite-id>
+	2.2注解的方式：
+		a) 将组件类注解为@Embeddable,并将组件的属性注解为@Id
+		b)  将组件的属性注解为@EmbeddedId
+		c)  类注解为@IdClass，主键的属性都注解为@Id
+		
