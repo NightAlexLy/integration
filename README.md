@@ -4,11 +4,11 @@
 ###项目结构
 	
 integration  
-	| _ _ _ cache   //cache framwork  
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _redis  
-	| _ _ _ clock   //auto clock
-	| _ _ _ container   // server    
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ jetty  // main     
+	| _ _ _ cache   //cache framwork     
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _redis       
+	| _ _ _ clock   //auto clock     
+	| _ _ _ container   // server      
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ jetty  // main        
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ jetty-plugin    
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| _ _ _ spring-boot         
 	| _ _ _ log     //log framework    
