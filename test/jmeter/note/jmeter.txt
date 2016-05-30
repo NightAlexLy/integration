@@ -1,0 +1,52 @@
+jmeter与 spring集成。
+	
+	注意点：需要将spring的依赖，导入到jmeter/lib/ext目录下。
+
+
+
+一、核心步骤	
+	
+	1.创建一个Java工程；
+	
+	2.将JMeter的lib目录下的jar文件添加进此工程的Build Path；
+	
+	3.创建一个类并实现JavaSamplerClient接口或继承AbstractJavaSamplerClient，并重写；
+	
+	public Arguments getDefaultParameters();设置可用参数及的默认值；
+	public void setupTest(JavaSamplerContext arg0)：每个线程测试前执行一次，做一些初始化工作；
+	public SampleResult runTest(JavaSamplerContext arg0)：开始测试，从arg0参数可以获得参数值；
+	public void teardownTest(JavaSamplerContext arg0)：测试结束时调用；
+	4.Export为Runnable Jar File；
+	
+	5.将此jar包放入JMETER_HOME\lib\ext目录；
+	
+	6.以管理员身份打开JMeter；
+	
+	7.创建线程组、Java Request、查看结果树，进行测试；
+	
+二、JMeter Java Sampler介绍
+	
+	Arguments
+	
+	getDefaultParameters() 用于获取界面的参数
+	
+	SampleResult
+	
+	runTest(JavaSamplerContext context) 类似于LR的Action，result.sampleStart()一个事务开始，result.sampleEnd()一个事务 结束
+	
+	void
+	
+	setupTest(JavaSamplerContext context) 初始化方法，类似于LR的init和Junit中的setUp()
+	
+	void
+	
+	teardownTest(JavaSamplerContext context) 类似于LR的end和Junit中的tearDown()
+	
+	执行的先后顺序为：
+	getDefaultParameters() --> setupTest(JavaSamplerContext context) --> runTest(JavaSamplerContext context) --> teardownTest(JavaSamplerContext context)
+	 
+	常用的方法：
+	①、addArgument("name", "value")    定义参数
+	②、sampleStart()    定义事务的开始，类似于LR的lr_start_transaction，和LR一样事务间不要放无关代码
+	③、sampleEnd()    定义事务的结束，类似于LR的lr_end_transaction
+	④、setSuccessful(true、false)    设置运行结果的成功或失败，Jmeter统计成功失败的次数，在聚合报告中能够体现。

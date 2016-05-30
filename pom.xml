@@ -39,5 +39,6 @@
 		<module>dubbo</module>
     <module>orm</module>
     <module>container</module>
+    <module>test</module>
   </modules>
 </project>

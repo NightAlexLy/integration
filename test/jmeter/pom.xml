@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.luisyang.integration</groupId>
+		<artifactId>test</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>org.luisyang.integration.test</groupId>
+	<artifactId>jmeter</artifactId>
+	<name>jmeter</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- http://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_core -->
+		<!-- <dependency>
+			<groupId>org.apache.jmeter</groupId>
+			<artifactId>ApacheJMeter_core</artifactId>
+			<version>2.13</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-pool2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-math3</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		<!-- http://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_java -->
+		<!-- <dependency>
+			<groupId>org.apache.jmeter</groupId>
+			<artifactId>ApacheJMeter_java</artifactId>
+			<version>2.13</version>
+		</dependency> -->
+
+		<!-- http://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+		<!-- <dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-pool2</artifactId> 
+			<version>2.3</version> </dependency> 
+		-->
+
+		<!-- http://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<!-- <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency> -->
+		
+		
+		<!-- http://mvnrepository.com/artifact/commons-logging/commons-logging -->
+		<!-- <dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.1.1</version>
+		</dependency> -->
+
+
+		<!-- http://mvnrepository.com/artifact/org.apache.jmeter/jorphan -->
+		<!-- <dependency>
+		    <groupId>org.apache.jmeter</groupId>
+		    <artifactId>jorphan</artifactId>
+		    <version>2.13</version>
+		</dependency> -->
+
+	</dependencies>
+</project>
