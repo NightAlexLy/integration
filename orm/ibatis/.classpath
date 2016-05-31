@@ -6,6 +6,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding=".." kind="src" path="src/test/resources"/>
+	<classpathentry excluding=".." kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -22,10 +24,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/ApacheJMeter_core.jar"/>
-	<classpathentry kind="lib" path="lib/ApacheJMeter_java.jar"/>
-	<classpathentry kind="lib" path="lib/jorphan.jar"/>
-	<classpathentry kind="lib" path="lib/logkit-2.0.jar"/>
-	<classpathentry kind="lib" path="lib/avalon-framework-4.1.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
