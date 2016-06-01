@@ -18,5 +18,6 @@
 	<modules>
 		<module>hibernate</module>
     <module>ibatis</module>
+    <module>mybatis</module>
   </modules>
 </project>
