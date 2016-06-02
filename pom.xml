@@ -40,5 +40,6 @@
     <module>orm</module>
     <module>container</module>
     <module>test</module>
+    <module>webservice</module>
   </modules>
 </project>

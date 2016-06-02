@@ -1,0 +1,11 @@
+使用wsgen命令生成所需文件
+	进入JAX-WS-Java-Server项目目录如：
+	D:\MyTemp\workspace\JAX-WS-Java-Server>
+	执行wsgen命令：
+	 wsgen -cp ./bin -r ./wsdl -s ./src -d ./bin -wsdl net.oseye.Hello
+	执行中可能出现“directory not found: wsdl”，手动建立wsdl目录。
+	成功后可在bin、src目录的命名空间net.oseye里看到生成的jaxws文件夹，以及在wsdl目录中的HelloService.wsdl和HelloService_schema1.xsd。
+
+	
+	
+	

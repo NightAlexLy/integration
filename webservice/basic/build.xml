@@ -1,0 +1,11 @@
+<project default="wsgen">
+	<target name="wsgen">
+		<exec executable="wsgen">
+			<arg
+				line="-cp . -r ./wsdl -s ./src/main/java -d ./bin -wsdl org.luisyang.integration.webservice.basic.server.SayHello" />
+		</exec>
+	</target>
+</project>  
+
+
+
