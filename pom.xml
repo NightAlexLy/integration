@@ -41,5 +41,7 @@
     <module>container</module>
     <module>test</module>
     <module>webservice</module>
+    <module>web-tools</module>
+    <module>guava</module>
   </modules>
 </project>

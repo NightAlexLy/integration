@@ -13,8 +13,9 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<modules></modules>	</properties>
+	<modules/>	</properties>
   <modules>
     <module>redis</module>
+    <module>memcached</module>
   </modules>
 </project>

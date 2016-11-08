@@ -5,9 +5,9 @@ package org.luisyang.integration.rpc.service;
  * 
  * @author apple
  */
-public interface RpcService {
+public interface HelloService {
 
 	
-	String echo(String ping);
+	String hello(String str);
 	
 }

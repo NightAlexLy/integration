@@ -35,7 +35,7 @@ public class OAStatistics {
 	
 	public static void login(String userName,String password) {
 
-		HttpPost post = new HttpPost("http://168.7.62.9:8800/yyptoa/ctrl/common/login");
+		HttpPost post = new HttpPost("http://168.7.55.219:8800/yyptoa/ctrl/common/login");
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 
@@ -57,7 +57,7 @@ public class OAStatistics {
 	}
 	public static ClockEntity toDayWork(String page) {
 
-		String url = "http://168.7.62.9:8800/yyptoa/ctrl/grid/read?serverId=attentionToday&_search=false&rows=20&page="
+		String url = "http://168.7.55.219:8800/yyptoa/ctrl/grid/read?serverId=attentionToday&_search=false&rows=20&page="
 				+ page + "&sidx=&sord=asc";
 		HttpGet get = new HttpGet(url);
 		try {
@@ -76,7 +76,7 @@ public class OAStatistics {
 	@SuppressWarnings("deprecation")
 	public static ClockEntity historyWork(String name,String page) {
 
-		String url = "http://168.7.62.9:8800/yyptoa/ctrl/grid/read?_=1457601188272&params=&limit=&serverId=oa_signin_all&"
+		String url = "http://168.7.55.219:8800/yyptoa/ctrl/grid/read?_=1457601188272&params=&limit=&serverId=oa_signin_all&"
 		+ "%24loadonce=false&_search=true&nd=1457601188270&rows=10&page="+page+"&sidx=&"
 		+ "sord=asc&filters=%7B%22groupOp%22%3A%22AND%22%2C%22rules%22%3A%5B%7B%22field%22%3A%22user_name"
 		+ "%22%2C%22op%22%3A%22eq%22%2C%22data%22%3A%22"+URLEncoder.encode(name)+"%22%7D%5D%7D";
@@ -153,7 +153,7 @@ public class OAStatistics {
 			e1.printStackTrace();
 		}
 
-		HttpPost post = new HttpPost("http://168.7.62.9:8800/yyptoa/ctrl/sign/sign");
+		HttpPost post = new HttpPost("http://168.7.55.219:8800/yyptoa/ctrl/sign/sign");
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		

@@ -13,5 +13,7 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>basic</module>
+    <module>axis2</module>
+    <module>rmi</module>
   </modules>
 </project>
